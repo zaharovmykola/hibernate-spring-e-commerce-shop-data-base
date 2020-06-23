@@ -2,16 +2,18 @@ package org.zakharov.mykola.hibernate.spring.database.ecommerce.shop.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Articles")
-public class Articles {
+public class Articles extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @OneToMany(mappedBy = "article_id")
-    @Column(name="id")
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//   // @OneToMany(mappedBy = "article_id")
+//    @Column(name="id")
+//    private long id;
 
     @Column(name="title", length=4)  //  ???  char(4)
     private String title;
@@ -26,19 +28,22 @@ public class Articles {
 
     @ManyToOne(fetch = FetchType.LAZY) // выкачиватся данные будут только когда попросят
     @JoinColumn(name = "id")
-    @Column(name="category_id")
+   // @Column(name="category_id") //???????????????????????????????
     private Integer category_id;
+
+    @OneToMany(mappedBy = "article_id")
+    private Set<Orders> setOfWorkers = new HashSet<>(0);
 
     public Articles() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getTitle() {
         return title;
@@ -86,6 +91,14 @@ public class Articles {
 
     public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
+    }
+
+    public Set<Orders> getSetOfWorkers() {
+        return setOfWorkers;
+    }
+
+    public void setSetOfWorkers(Set<Orders> setOfWorkers) {
+        this.setOfWorkers = setOfWorkers;
     }
 }
 

@@ -1,16 +1,18 @@
 package org.zakharov.mykola.hibernate.spring.database.ecommerce.shop.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Users")
-public class Users {
+public class Users extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @OneToMany(mappedBy = "user_id")
-    @Column(name="id")
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    //@OneToMany(mappedBy = "user_id")
+//    @Column(name="id")
+//    private long id;
 
     @Column(name="login", length=25)
     private String login;
@@ -19,19 +21,22 @@ public class Users {
 
     @ManyToOne(fetch = FetchType.LAZY) // выкачиватся данные будут только когда попросят
     @JoinColumn(name = "id")
-    @Column(name="role_id")
+    //@Column(name="role_id")  //???????????????????????????????
     private Integer role_id;
+
+    @OneToMany(mappedBy = "user_id")
+    private Set<Orders> setOfWorkers = new HashSet<>(0);
 
     public Users() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getLogin() {
         return login;
@@ -55,5 +60,13 @@ public class Users {
 
     public void setRole_id(Integer role_id) {
         this.role_id = role_id;
+    }
+
+    public Set<Orders> getSetOfWorkers() {
+        return setOfWorkers;
+    }
+
+    public void setSetOfWorkers(Set<Orders> setOfWorkers) {
+        this.setOfWorkers = setOfWorkers;
     }
 }

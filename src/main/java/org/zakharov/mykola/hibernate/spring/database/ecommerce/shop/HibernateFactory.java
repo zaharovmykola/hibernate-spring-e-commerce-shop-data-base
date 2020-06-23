@@ -20,6 +20,7 @@ public class HibernateFactory {
         cfg.addAnnotatedClass(Category.class);
         cfg.addAnnotatedClass(Orders.class);
         cfg.addAnnotatedClass(Roles.class);
+        cfg.addAnnotatedClass(Users.class);
 
         sessionFactory = cfg.buildSessionFactory();
     }
