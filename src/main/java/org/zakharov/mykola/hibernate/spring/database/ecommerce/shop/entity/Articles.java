@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="Articles")
+@Table(name="articles")
 public class Articles extends AbstractEntity {
 
 //    @Id
@@ -15,23 +15,23 @@ public class Articles extends AbstractEntity {
 //    @Column(name="id")
 //    private long id;
 
-    @Column(name="title", length=4)  //  ???  char(4)
+    @Column(name="title", columnDefinition="CHAR(4)")  //  ???  char(4)
     private String title;
     @Column(name="description", length=500)
     private String description;
-    @Column(name="price")  // ??? decimal(10,0)
+    @Column(name="price", columnDefinition="DECIMAL(10,0)")  // ??? decimal(10,0)
     private BigDecimal price;
     @Column(name="quantity")
     private Integer quantity;
-    @Column(name="image")  //  ???  longtext
+    @Column(name="image", columnDefinition = "LONGTEXT")  //  ???  longtext
     private String image;
 
     @ManyToOne(fetch = FetchType.LAZY) // выкачиватся данные будут только когда попросят
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "category_id")
    // @Column(name="category_id") //???????????????????????????????
-    private Integer category_id;
+    private Category category;
 
-    @OneToMany(mappedBy = "article_id")
+    @OneToMany(mappedBy = "article")
     private Set<Orders> setOfWorkers = new HashSet<>(0);
 
     public Articles() {
@@ -85,12 +85,12 @@ public class Articles extends AbstractEntity {
         this.image = image;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Set<Orders> getSetOfWorkers() {

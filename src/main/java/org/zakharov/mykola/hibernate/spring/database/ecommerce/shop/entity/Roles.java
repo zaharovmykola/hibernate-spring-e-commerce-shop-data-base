@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="Roles")
+@Table(name="roles")
 public class Roles extends AbstractEntity {
 
 //    @Id
@@ -17,7 +17,7 @@ public class Roles extends AbstractEntity {
     @Column(name="name", length=25)
     private String name;
 
-    @OneToMany(mappedBy = "role_id")
+    @OneToMany(mappedBy = "role")
     private Set<Users> setOfWorkers = new HashSet<>(0);
 
     public Roles() {

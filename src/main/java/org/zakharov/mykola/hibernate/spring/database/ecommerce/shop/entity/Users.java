@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class Users extends AbstractEntity {
 
 //    @Id
@@ -20,11 +20,11 @@ public class Users extends AbstractEntity {
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY) // выкачиватся данные будут только когда попросят
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "role_id")
     //@Column(name="role_id")  //???????????????????????????????
-    private Integer role_id;
+    private Roles role;
 
-    @OneToMany(mappedBy = "user_id")
+    @OneToMany(mappedBy = "user")
     private Set<Orders> setOfWorkers = new HashSet<>(0);
 
     public Users() {
@@ -54,12 +54,12 @@ public class Users extends AbstractEntity {
         this.password = password;
     }
 
-    public Integer getRole_id() {
-        return role_id;
+    public Roles getRole() {
+        return role;
     }
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
+    public void setRole(Roles role) {
+        this.role = role;
     }
 
     public Set<Orders> getSetOfWorkers() {

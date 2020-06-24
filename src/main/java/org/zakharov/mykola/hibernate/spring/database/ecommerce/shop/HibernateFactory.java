@@ -12,10 +12,11 @@ public class HibernateFactory {
         cfg.setProperty("connection.driver_class", "com.mysql.jdbc.Driver");
         cfg.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/e-commerce-shop?serverTimezone=UTC");
         cfg.setProperty("hibernate.connection.username", "root");
-        cfg.setProperty("hibernate.connection.password", "K1l1mandzar0");
+        cfg.setProperty("hibernate.connection.password", "root");
         cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
         cfg.setProperty("show_sql", "true");
         cfg.setProperty("hibernate.hbm2ddl.auto", "validate");
+        // cfg.setProperty("hibernate.default_schema", "dbo");
         cfg.addAnnotatedClass(Articles.class);
         cfg.addAnnotatedClass(Category.class);
         cfg.addAnnotatedClass(Orders.class);

@@ -5,9 +5,9 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class AbstractEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private long id;
+    private Integer id;
 
     public AbstractEntity() {
     }
@@ -16,7 +16,7 @@ public abstract class AbstractEntity {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
